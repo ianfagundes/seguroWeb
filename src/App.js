@@ -1,26 +1,53 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import {
+  createMuiTheme,
+  MuiThemeProvider,
+  AppBar,
+  Toolbar,
+  Typography
+} from "@material-ui/core";
+
+import blue from "material-ui/colors/blue";
+import DataTable from "./components/DataTable.js"
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: blue[600],
+      contrastText: "#fff"
+    }
+  }
+});
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: [
+        {
+          key: "test key key",
+          temperatura: "test key temperatura",
+          umidade: "test key umidade",
+          cliente: "test key cliente",
+          data: "test key data"
+        }
+      ]
+    };
+  }
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <MuiThemeProvider theme={theme}>
+        <React.Fragment>
+          <AppBar position="static">
+            <Toolbar>
+              <Typography type="title" color="inherit">
+                SSat Seguros
+              </Typography>
+            </Toolbar>
+          </AppBar>
+          <DataTable data={this.state.data} />
+        </React.Fragment>
+      </MuiThemeProvider>
     );
   }
 }
