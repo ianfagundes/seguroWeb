@@ -8,7 +8,8 @@ import {
 } from "@material-ui/core";
 
 import blue from "material-ui/colors/blue";
-import DataTable from "./components/DataTable.js"
+import DataTable from "./components/DataTable.js";
+import FirebaseService from "./services/FirebaseService";
 
 const theme = createMuiTheme({
   palette: {
@@ -33,6 +34,12 @@ class App extends Component {
         }
       ]
     };
+  }
+
+  componentDidMount() {
+    FirebaseService.getDataList("leituras", dataReceived =>
+      this.setState({ data: dataReceived })
+    );
   }
   render() {
     return (
